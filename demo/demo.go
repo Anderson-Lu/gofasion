@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Anderson-Lu/fasion/gofasion"
+	"github.com/Anderson-Lu/gofasion/gofasion"
 )
 
 var testJson = `
