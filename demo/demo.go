@@ -62,3 +62,57 @@ func main() {
 	fmt.Println(iter.Name)
 	fmt.Println(iter.Value)
 }
+
+func demo2() {
+
+	yourJson := `
+		"data": {
+			"user": {
+				"user_id": "",
+				"email": "",
+				"name": "",
+				"surname": "",
+				"telephone": "",
+				"country": "",
+				"time_zone": "",
+				"date_format": "DD/MM/YYYY 24H",
+				"language": "en",
+				"company_default": "",
+				"status": "not confirmed",
+				"companies": [
+					{
+					"data1":""
+					"data2":""
+					}
+				],
+				"superadmin": "",
+				"accept_newsletter": false
+			}
+		},
+		"method": "POST",
+		"url": "/v1.0/url/test",
+		"date": "2018-08-09T11:00:55+02:00",
+		"status": "SUCCESS",
+		"code": "200",
+		"message": "HTTP OK",
+		"details": "Valid"
+	}
+	`
+
+	fsion := gofasion.NewFasion(yourJson)
+	data := fsion.Get("data")
+	user := data.Get("user")
+
+	userId := user.Get("user_id").ValueStr()
+	email := user.Get("email").ValueStr()
+
+	fmt.Println(userId, email)
+
+	companies := user.Get("companies").Array()
+
+	for _, v := range companies {
+		fmt.Println(v.Get("data1").ValueStr())
+		fmt.Println(v.Get("data2").ValueStr())
+	}
+
+}
