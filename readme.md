@@ -13,7 +13,7 @@ Gofasion is a lightweight parsing library that facilitates the parsing of interf
 ### Installation
 
 ```shell
-$ go get github.com/Anderson-Lu/fasion/gofasion
+$ go get github.com/Anderson-Lu/gofasion/gofasion
 ```
 
 ### How to locate a JSON node

@@ -12,7 +12,7 @@ Gofasion是一个方便开发过程中接口JSON数据解析的轻量级解析�
 ### 安装
 
 ```shell
-$ go get github.com/Anderson-Lu/fasion/gofasion
+$ go get github.com/Anderson-Lu/gofasion/gofasion
 ```
 
 ### 如何定位JSON节点
