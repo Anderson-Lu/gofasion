@@ -1,102 +1,180 @@
-GoFasion:一个轻量级的具备链式调用风格的JSON数据解析神器
+GoFasion: A lightweight JSON data parsing library with chained calling style
 ---
 
-Gofasion是一个方便开发过程中接口JSON数据解析的轻量级解析库，其最大的特点在于支持链式调用，也就是说不必预先定义好数据的结构就可以直接获取到目标键名和键值。
+[中文文档](https://github.com/Anderson-Lu/gofasion/blob/master/readme_cn.md)
 
-### 安装
+Gofasion is a lightweight parsing library that facilitates the parsing of interface JSON data during development. Its biggest feature is to support chained calls, which means that the target key name and key value can be directly obtained without pre-defining the structure of the data.
+
+
+### Open source
+
+[https://github.com/Anderson-Lu/gofasion](https://github.com/Anderson-Lu/gofasion)
+
+### Installation
 
 ```shell
-go get github.com/Anderson-Lu/gofasion/gofasion
+$ go get github.com/Anderson-Lu/fasion/gofasion
 ```
 
-### 快速开始
+### How to locate a JSON node
 
-```shell
+You can think of a JSON data as a tree, each element is a node on the tree (*Fastion), the value of the node can be any type (bool, int etc.), which can be traced from the root node through chained calls. Any node to take out the values.
+
+```json
+{
+  "level1":{
+      "level2":{
+          "level3":1
+        }
+    }
+}
+```
+
+To retrieve the value of `level3` above, you can quickly access it by the following example:
+
+```golang
+fsion := gofasion.NewFasion(yourJsonStr)
+level3 := fsion.Get("level1").Get("level2").Get("level3").ValueStr()
+```
+
+### How to traverse JSON arrays
+
+We provide the `Array()` method to represent the JSON data of the array type. For the elements in the array, it is a `*Fasion` object, which can still be used.
+
+```json
+{
+  "array" : [
+    {"name":1},
+    {"name":2}
+  ]
+}
+```
+
+To traverse the data in `array`, just do this:
+
+```golang
+array := fsion.Get("array").Array()
+for _,v := range array{
+  name := v.Get("name").ValueInt()
+  //your code
+}
+```
+
+### How to traverse irregular JSON data or no key name data
+
+Many times, we need to parse irregular JSON data, such as:
+
+```json
+[
+  1,2,"helloword",{"name":"demo"}
+] 
+```
+
+Can quickly get values ​​by `Array()` method
+
+### Quick start
+
+```golang
 package main
 
 import (
-	"github.com/Anderson-Lu/gofasion/gofasion"
-	"fmt"
+  "github.com/Anderson-Lu/fasion/gofasion"
+  "fmt"
 )
 
-//规则数据
+//Rule data
 var testJson = `
-	{
-		"name":"foo",
-		"value":1,
-		"second_level": {"name":2},
-		"second_array":[1,2,3,4,5,6,7],
-		"bool": true,
-		"value64":1234567890
-	}
+  {
+    "name":"foo",
+    "value":1,
+    "second_level": {"name":2},
+    "second_array":[1,2,3,4,5,6,7],
+    "bool": true,
+    "value64":1234567890
+  }
 `
 
-//不规则数据
+//Irregular data
 var testJson2 = `
   [
-	  1,2,"helloword",{"name":"demo"}
+    1,2,"helloword",{"name":"demo"}
   ]  
 `
 
 func main() {
-	fsion := gofasion.NewFasion(testJson)
+  
+  fsion := gofasion.NewFasion(testJson)
 
-     //输出 "foo"
-	fmt.Println(fsion.Get("name").ValueStr())
-	
-     //输出 1
-    fmt.Println(fsion.Get("value").ValueInt())
-	
-     //输出 {\"name\":\"foo\",\"value\":1...}
-    fmt.Println(fsion.Json())
+  //output "foo"
+  fmt.Println(fsion.Get("name").ValueStr())
+  
+  //output 1
+  fmt.Println(fsion.Get("value").ValueInt())
+  
+  //output {"name":"foo","value":1...}
+  fmt.Println(fsion.Json())
 
-	i32 := fsion.Get("value").ValueInt32()
-	fmt.Println(i32)
+  i32 := fsion.Get("value").ValueInt32()
+  fmt.Println(i32)
 
-	i64 := fsion.Get("value64").ValueInt64()
-	fmt.Println(i64)
+  i64 := fsion.Get("value64").ValueInt64()
+  fmt.Println(i64)
 
-	second_fson := fsion.Get("second_level")
-	fmt.Println(second_fson.Get("name").ValueStr())
+  second_fson := fsion.Get("second_level")
+  fmt.Println(second_fson.Get("name").ValueStr())
 
-     //数组数据的遍历
-	second_array := fsion.Get("second_array").Array()
-	for _, v := range second_array {
-		fmt.Println(v.ValueInt())
-	}
+  //Traversal of array data
+  second_array := fsion.Get("second_array").Array()
+  for _, v := range second_array {
+    fmt.Println(v.ValueInt())
+  }
 
-	boolVal := fsion.Get("bool").ValueStr()
-	fmt.Println(boolVal)
+  boolVal := fsion.Get("bool").ValueStr()
+  fmt.Println(boolVal)
 
-     //不规则数据的解析
-	fsion2 := gofasion.NewFasion(testJson2)
-	elems := fsion2.Array()
-	fmt.Println(elems[0].ValueInt())
-	fmt.Println(elems[1].ValueInt())
-	fmt.Println(elems[2].ValueStr())
+  //Analysis of irregular data
+  fsion2 := gofasion.NewFasion(testJson2)
+  elems := fsion2.Array()
+  fmt.Println(elems[0].ValueInt())
+  fmt.Println(elems[1].ValueInt())
+  fmt.Println(elems[2].ValueStr())
 
-	fmt.Println(elems[3].Json())
+  fmt.Println(elems[3].Json())
 
-    //传统结构体解析
-	var iter struct {
-		Name  string `json:"name"`
-		Value int    `json:"value"`
-	}
-	fsion.Value(&iter)
-	fmt.Println(iter.Name)
-	fmt.Println(iter.Value)
+  //Traditional structure analysis
+  var iter struct {
+    Name  string `json:"name"`
+    Value int    `json:"value"`
+  }
+  fsion.Value(&iter)
+  fmt.Println(iter.Name)
+  fmt.Println(iter.Value)
 }
 
 ```
 
-### 版本
+### Basic methods
 
-`v1` 基础版本，提供常用的基本功能
+```golang
+  Get(key string) *IFasion  //Get the JSON node object, each node object contains all the methods below
+  ValueStr() string         //Get the string value of the node
+  ValueInt() int            //Get the int value of the node
+  ValueInt32() int32   
+  ValueInt64() int64
+  ValueBool() bool
+  Array() []*Fasion         //Get the array object of the node
+  Value(interface{}) error  //Similar to json.Marshal()
+  Json() string             //Get the JSON string of the node
+```
 
-### 贡献
+### Version
 
-欢迎大家提出宝贵issue，也可以提交合并请求，希望能做一款让所有golang开发者收益的开源库。
+`v1` Basic version, providing common basic functions
 
-### 许可
+### Contribution
 
-MIT Licence
+You are welcome to submit a valuable issue, you can also submit a merger request, hoping to make an open source library for all golang developers.
+
+### License
+
+MIT License
