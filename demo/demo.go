@@ -61,6 +61,9 @@ func main() {
 	fsion.Value(&iter)
 	fmt.Println(iter.Name)
 	fmt.Println(iter.Value)
+
+	//performance test
+	Test1()
 }
 
 func demo2() {

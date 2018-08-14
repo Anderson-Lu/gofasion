@@ -153,6 +153,10 @@ func main() {
 
 ```
 
+### Performance
+
+1,000,000 `*Fastion.Get()` cost about 5,000ms ~ 7,000ms.
+
 ### Basic methods
 
 ```golang

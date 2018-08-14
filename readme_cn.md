@@ -165,6 +165,10 @@ func main() {
   Value(interface{}) error  //与json.Marshal()类似
 ```
 
+### 性能
+
+1,000,000 `*Fastion.Get()` 耗费 5,000ms ~ 7,000ms.
+
 ### 版本
 
 `v1` 基础版本，提供常用的基本功能
