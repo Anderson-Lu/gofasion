@@ -155,6 +155,14 @@ func main() {
 ### 基本方法
 
 ```golang
+
+  //how to create *Fasion instance
+  func NewFasion(rawJson string) *Fasion               //Create Fasion From raw json
+  func NewFasionFromBytes(rawJson []byte) *Fasion      //Create Fasion From bytes
+  func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion  //Create Fasion From http get
+
+  //Methods for *Fasion
+
   Get(key string) *IFasion  //获取JSON节点对象,每个节点对象包含下面所有方法
   ValueStr() string         //获取节点的字符串值
   ValueInt() int            //获取节点的int值

@@ -160,6 +160,12 @@ func main() {
 ### Basic methods
 
 ```golang
+  //how to create *Fasion instance
+  func NewFasion(rawJson string) *Fasion               //Create Fasion From raw json
+  func NewFasionFromBytes(rawJson []byte) *Fasion      //Create Fasion From bytes
+  func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion  //Create Fasion From http get
+
+  //Methods for *Fasion
   Get(key string) *IFasion  //Get the JSON node object, each node object contains all the methods below
   ValueStr() string         //Get the string value of the node
   ValueInt() int            //Get the int value of the node

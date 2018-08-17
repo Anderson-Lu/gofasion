@@ -1,5 +1,7 @@
 package gofasion
 
+import "net/url"
+
 type Fasion struct {
 	rawJson string
 	errInfo error
@@ -15,6 +17,22 @@ func NewFasion(rawJson string) *Fasion {
 func NewFasionFromBytes(rawJson []byte) *Fasion {
 	return &Fasion{
 		rawJson: string(rawJson),
+	}
+}
+
+func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion {
+	if params == nil {
+		params = url.Values{}
+	}
+	bs, err := HttpGet(targetUrl, params)
+	if err != nil {
+		return &Fasion{
+			rawJson: "",
+			errInfo: err,
+		}
+	}
+	return &Fasion{
+		rawJson: string(bs),
 	}
 }
 
