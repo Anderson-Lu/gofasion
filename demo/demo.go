@@ -43,7 +43,7 @@ func main() {
 		fmt.Println(v.ValueInt())
 	}
 
-	fmt.Println(fsin.GetFromPath("second_level.name").ValueStr())
+	fmt.Println("GetFromPath()", fsion.GetFromPath("second_level.name").ValueStr())
 
 	boolVal := fsion.Get("bool").ValueStr()
 	fmt.Println(boolVal)
@@ -65,7 +65,7 @@ func main() {
 	fmt.Println(iter.Value)
 
 	//performance test
-	Test1()
+	// Test1()
 }
 
 func demo2() {
