@@ -43,6 +43,8 @@ func main() {
 		fmt.Println(v.ValueInt())
 	}
 
+	fmt.Println(fsin.GetFromPath("second_level.name").ValueStr())
+
 	boolVal := fsion.Get("bool").ValueStr()
 	fmt.Println(boolVal)
 

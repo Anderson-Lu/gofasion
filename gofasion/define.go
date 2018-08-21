@@ -2,6 +2,7 @@ package gofasion
 
 type IFasion interface {
 	Get(key string) *IFasion
+	GetNode(dir string) *IFasion
 
 	ValueStr() string
 

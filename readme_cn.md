@@ -34,6 +34,9 @@ $ go get github.com/Anderson-Lu/gofasion/gofasion
 ```golang
 fsion := gofasion.NewFasion(yourJsonStr)
 level3 := fsion.Get("level1").Get("level2").Get("level3").ValueStr()
+
+//或者直接使用GetFromPath(dir string)方法直接访问
+//level3 := fsion.GetFromPath("level1.level2.level3").ValueStr()
 ```
 
 ### 如何遍历JSON数组
@@ -162,8 +165,10 @@ func main() {
   func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion  //Create Fasion From http get
 
   //Methods for *Fasion
+  Get(key string) *IFasion          //获取JSON节点对象,每个节点对象包含下面所有方法
+  GetFromPath(dir string) *IFasion  //获取JSON节点对象(路径比如a.b.c)
 
-  Get(key string) *IFasion  //获取JSON节点对象,每个节点对象包含下面所有方法
+  //Methods to get value from *Fasion node
   ValueStr() string         //获取节点的字符串值
   ValueInt() int            //获取节点的int值
   ValueInt16() int16 
