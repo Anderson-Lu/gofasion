@@ -166,8 +166,11 @@ func main() {
   Get(key string) *IFasion  //获取JSON节点对象,每个节点对象包含下面所有方法
   ValueStr() string         //获取节点的字符串值
   ValueInt() int            //获取节点的int值
-  ValueInt32() int32   
+  ValueInt16() int16 
+  ValueInt32() int32
   ValueInt64() int64
+  ValueFloat32() float32
+  ValueFloat64() float64
   ValueBool() bool
   Array() []*Fasion         //获取节点的数组对象
   Value(interface{}) error  //与json.Marshal()类似

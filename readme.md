@@ -169,8 +169,11 @@ func main() {
   Get(key string) *IFasion  //Get the JSON node object, each node object contains all the methods below
   ValueStr() string         //Get the string value of the node
   ValueInt() int            //Get the int value of the node
+  ValueInt16() int16 
   ValueInt32() int32   
   ValueInt64() int64
+  ValueFloat32() float32
+  ValueFloat64() float64
   ValueBool() bool
   Array() []*Fasion         //Get the array object of the node
   Value(interface{}) error  //Similar to json.Marshal()

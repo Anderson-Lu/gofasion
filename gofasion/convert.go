@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+//Init current json node as single node
 func (self *Fasion) initCur() {
 	if self.current == nil {
 		curNode, err := self.parseJson()
@@ -14,6 +15,7 @@ func (self *Fasion) initCur() {
 	}
 }
 
+//Init current json node as array
 func (self *Fasion) initArray() {
 	if self.current == nil {
 		curNode, err := self.parseArray()
@@ -22,6 +24,7 @@ func (self *Fasion) initArray() {
 	}
 }
 
+//Parse current node value to string
 func (self *Fasion) ValueStr() string {
 	self.initCur()
 	if val, ok := self.current.(string); ok {
@@ -30,6 +33,7 @@ func (self *Fasion) ValueStr() string {
 	return self.rawJson
 }
 
+//Parse current node value to int64
 func (self *Fasion) ValueInt64() int64 {
 	self.initCur()
 	if val, ok := self.current.(int64); ok {
@@ -41,6 +45,7 @@ func (self *Fasion) ValueInt64() int64 {
 	return 0
 }
 
+//Parse current node value to int32
 func (self *Fasion) ValueInt32() int32 {
 	self.initCur()
 	if val, ok := self.current.(int32); ok {
@@ -52,6 +57,19 @@ func (self *Fasion) ValueInt32() int32 {
 	return 0
 }
 
+//Parse current node value to int16
+func (self *Fasion) ValueInt16() int16 {
+	self.initCur()
+	if val, ok := self.current.(int16); ok {
+		return val
+	}
+	if n, ok := strconv.ParseInt(self.rawJson, 10, 16); ok == nil {
+		return int16(n)
+	}
+	return 0
+}
+
+//Parse current node value to int
 func (self *Fasion) ValueInt() int {
 	self.initCur()
 	if val, ok := self.current.(int); ok {
@@ -63,10 +81,36 @@ func (self *Fasion) ValueInt() int {
 	return 0
 }
 
+//Parse current node value to float32
+func (self *Fasion) ValueFloat32() float32 {
+	self.initCur()
+	if val, ok := self.current.(float32); ok {
+		return val
+	}
+	if n, ok := strconv.ParseFloat(self.rawJson, 32); ok == nil {
+		return float32(n)
+	}
+	return 0
+}
+
+//Parse current node value to float64
+func (self *Fasion) ValueFloat64() float64 {
+	self.initCur()
+	if val, ok := self.current.(float64); ok {
+		return val
+	}
+	if n, ok := strconv.ParseFloat(self.rawJson, 64); ok == nil {
+		return n
+	}
+	return 0
+}
+
+//Marshal current node to json string
 func (self *Fasion) Json() string {
 	return strings.Trim(self.rawJson, " ")
 }
 
+//Parse current node value to []*Fasion nodes
 func (self *Fasion) Array() []*Fasion {
 	self.initArray()
 	result := make([]*Fasion, 0)
@@ -81,6 +125,7 @@ func (self *Fasion) Array() []*Fasion {
 	return result
 }
 
+//Parse current node value to bool
 func (self *Fasion) ValueBool() bool {
 	self.initCur()
 	valueStr := self.ValueStr()
@@ -96,6 +141,7 @@ func (self *Fasion) ValueBool() bool {
 	return false
 }
 
+//Parse current node value to specific interface
 func (self *Fasion) Value(dest interface{}) error {
 	return json.Unmarshal([]byte(self.rawJson), &dest)
 }
