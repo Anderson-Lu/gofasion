@@ -24,6 +24,9 @@ var testJson2 = `
 `
 
 func main() {
+
+	demo3()
+
 	fsion := gofasion.NewFasion(testJson)
 	fmt.Println(fsion.Get("name").ValueStr())
 	fmt.Println(fsion.Get("value").ValueInt())
@@ -66,6 +69,12 @@ func main() {
 
 	//performance test
 	// Test1()
+}
+
+func demo3() {
+	yourJson := "i am only a string"
+	fsion := gofasion.NewFasion(yourJson)
+	fmt.Println(fsion.ValueStr())
 }
 
 func demo2() {
