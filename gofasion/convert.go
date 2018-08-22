@@ -25,9 +25,9 @@ func (self *Fasion) initArray() {
 func (self *Fasion) ValueStr() string {
 	self.initCur()
 	if val, ok := self.current.(string); ok {
-		return val
+		return strings.Replace(val, "\"", "", -1)
 	}
-	return self.rawJson
+	return strings.Replace(self.rawJson, "\"", "", -1)
 }
 
 func (self *Fasion) ValueInt64() int64 {
