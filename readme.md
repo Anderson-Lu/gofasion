@@ -35,6 +35,9 @@ To retrieve the value of `level3` above, you can quickly access it by the follow
 ```golang
 fsion := gofasion.NewFasion(yourJsonStr)
 level3 := fsion.Get("level1").Get("level2").Get("level3").ValueStr()
+
+//or fetch specific value by GetFromPath(dir string) method 
+//level3 := fsion.GetFromPath("level1.level2.level3").ValueStr()
 ```
 
 ### How to traverse JSON arrays
@@ -167,10 +170,16 @@ func main() {
 
   //Methods for *Fasion
   Get(key string) *IFasion  //Get the JSON node object, each node object contains all the methods below
+  GetFromPath(dir string) *IFasion //Get the JSON node via node path like node1.node2.node3
+
+  //Methods to get value from *Fasion node
   ValueStr() string         //Get the string value of the node
   ValueInt() int            //Get the int value of the node
+  ValueInt16() int16 
   ValueInt32() int32   
   ValueInt64() int64
+  ValueFloat32() float32
+  ValueFloat64() float64
   ValueBool() bool
   Array() []*Fasion         //Get the array object of the node
   Value(interface{}) error  //Similar to json.Marshal()

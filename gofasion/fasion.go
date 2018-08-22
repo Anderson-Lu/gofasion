@@ -1,6 +1,9 @@
 package gofasion
 
-import "net/url"
+import (
+	"net/url"
+	"strings"
+)
 
 type Fasion struct {
 	rawJson string
@@ -49,4 +52,18 @@ func (self *Fasion) Get(key string) *Fasion {
 		}
 	}
 	return self
+}
+
+//Get node directly via absolute path like "node1.node2.node3"
+func (self *Fasion) GetFromPath(dir string) *Fasion {
+	paths := strings.Split(dir, ".")
+	var ret *Fasion
+	for _, path := range paths {
+		if ret == nil {
+			ret = self.Get(path)
+		} else {
+			ret = ret.Get(path)
+		}
+	}
+	return ret
 }
