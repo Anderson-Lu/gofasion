@@ -44,6 +44,7 @@ var testJson2 = `
 `
 
 func main() {
+
 	fsion := gofasion.NewFasion(testJson)
 	fmt.Println(fsion.Get("name").ValueStr())
 	fmt.Println(fsion.Get("value").ValueInt())

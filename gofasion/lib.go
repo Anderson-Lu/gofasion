@@ -2,9 +2,13 @@ package gofasion
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 func (self *Fasion) parseJson() (map[string]interface{}, error) {
+	if !json.Valid([]byte(self.rawJson)) {
+		return nil, fmt.Errorf("invalid json format")
+	}
 	var result map[string]interface{}
 	e := json.Unmarshal([]byte(self.rawJson), &result)
 	return result, e
