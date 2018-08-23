@@ -17,6 +17,9 @@ func (self *Fasion) parseArray() ([]interface{}, error) {
 }
 
 func (self *Fasion) toJson(target interface{}) (string, error) {
+	if val, ok := target.(string); ok {
+		return val, nil
+	}
 	bs, err := json.Marshal(target)
 	return string(bs), err
 }

@@ -6,6 +6,26 @@ import (
 	"github.com/Anderson-Lu/gofasion/gofasion"
 )
 
+func DemoCheckJsonFormat() {
+	fsion := gofasion.NewFasion("i am a wrong json encoding format")
+	fmt.Println(fsion.IsValidJson())
+}
+
+func DemoParseStringVal() {
+	fsion := gofasion.NewFasion(`{"name":"hello world & hello world"}`)
+	fmt.Println(fsion.Get("name").ValueStr())
+}
+
+func DemoParseIntVal() {
+	fsion := gofasion.NewFasion(`{"name":1}`)
+	fmt.Println(fsion.Get("name").ValueInt())
+}
+
+func DemoParseFloat64() {
+	fsion := gofasion.NewFasion(`{"name":1.000001}`)
+	fmt.Println(fsion.Get("name").ValueFloat64())
+}
+
 var testJson = `
 	{
 		"name":"foo",
@@ -43,7 +63,7 @@ func main() {
 		fmt.Println(v.ValueInt())
 	}
 
-	fmt.Println(fsin.GetFromPath("second_level.name").ValueStr())
+	fmt.Println(fsion.GetFromPath("second_level.name").ValueStr())
 
 	boolVal := fsion.Get("bool").ValueStr()
 	fmt.Println(boolVal)
@@ -65,7 +85,7 @@ func main() {
 	fmt.Println(iter.Value)
 
 	//performance test
-	Test1()
+	// Test1()
 }
 
 func demo2() {

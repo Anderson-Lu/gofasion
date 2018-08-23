@@ -4,6 +4,8 @@ type IFasion interface {
 	Get(key string) *IFasion
 	GetNode(dir string) *IFasion
 
+	IsValidJson() bool
+
 	ValueStr() string
 
 	ValueInt() int

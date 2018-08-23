@@ -1,6 +1,7 @@
 package gofasion
 
 import (
+	"encoding/json"
 	"net/url"
 	"strings"
 )
@@ -27,7 +28,7 @@ func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion {
 	if params == nil {
 		params = url.Values{}
 	}
-	bs, err := HttpGet(targetUrl, params)
+	bs, err := httpGet(targetUrl, params)
 	if err != nil {
 		return &Fasion{
 			rawJson: "",
@@ -66,4 +67,9 @@ func (self *Fasion) GetFromPath(dir string) *Fasion {
 		}
 	}
 	return ret
+}
+
+//Judge whether the JSON format is correct.
+func (self *Fasion) IsValidJson() bool {
+	return json.Valid([]byte(self.rawJson))
 }
