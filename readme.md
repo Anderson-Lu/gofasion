@@ -182,6 +182,7 @@ func main() {
   ValueFloat64() float64
   ValueBool() bool
   Array() []*Fasion         //Get the array object of the node
+  ArrayForEach(func(int, *Fasion)) //Get the array object of the node iterator
   Value(interface{}) error  //Similar to json.Marshal()
   Json() string             //Get the JSON string of the node
 ```

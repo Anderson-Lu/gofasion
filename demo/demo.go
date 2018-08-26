@@ -26,6 +26,18 @@ func DemoParseFloat64() {
 	fmt.Println(fsion.Get("name").ValueFloat64())
 }
 
+func DemoParseArray() {
+	fsion := gofasion.NewFasion(`[1,2,3,45]`)
+	fmt.Println(fsion.Array())
+}
+
+func DemoParseArrayForEach() {
+	fsion := gofasion.NewFasion(`[1,2,3,4,5]`)
+	fsion.ArrayForEach(func(idx int, node *Fasion) {
+		fmt.Println(idx, node.ValueInt())
+	})
+}
+
 var testJson = `
 	{
 		"name":"foo",

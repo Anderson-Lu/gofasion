@@ -178,6 +178,7 @@ func main() {
   ValueFloat64() float64
   ValueBool() bool
   Array() []*Fasion         //获取节点的数组对象
+  ArrayForEach(func(int, *Fasion)) //直接遍历对象数组
   Value(interface{}) error  //与json.Marshal()类似
 ```
 
