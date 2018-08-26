@@ -33,7 +33,7 @@ func DemoParseArray() {
 
 func DemoParseArrayForEach() {
 	fsion := gofasion.NewFasion(`[1,2,3,4,5]`)
-	fsion.ArrayForEach(func(idx int, node *Fasion) {
+	fsion.ArrayForEach(func(idx int, node *gofasion.Fasion) {
 		fmt.Println(idx, node.ValueInt())
 	})
 }
