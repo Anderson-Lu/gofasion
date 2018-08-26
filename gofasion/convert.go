@@ -125,6 +125,14 @@ func (self *Fasion) Array() []*Fasion {
 	return result
 }
 
+//Parse current node Value to []*Fasion and iterate it via job function
+func (self *Fasion) ArrayForEach(job func(int, *Fasion)) {
+	elements := self.Array()
+	for i, v := range elements {
+		job(i, v)
+	}
+}
+
 //Parse current node value to bool
 func (self *Fasion) ValueBool() bool {
 	self.initCur()

@@ -25,6 +25,7 @@ type IFasion interface {
 	ValueBool() bool
 
 	Array() []*Fasion
+	ArrayForEach(func(int, *Fasion))
 
 	Value(interface{}) error
 }
