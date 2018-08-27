@@ -16,6 +16,13 @@ Gofasion is a lightweight parsing library that facilitates the parsing of interf
 $ go get github.com/Anderson-Lu/gofasion/gofasion
 ```
 
+### Go module
+
+```shell
+//go.mod
+module github.com/Anderson-Lu/gofasion/gofasion
+```
+
 ### How to locate a JSON node
 
 You can think of a JSON data as a tree, each element is a node on the tree (*Fastion), the value of the node can be any type (bool, int etc.), which can be traced from the root node through chained calls. Any node to take out the values.

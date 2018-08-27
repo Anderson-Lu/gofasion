@@ -15,6 +15,13 @@ Gofasion是一个方便开发过程中接口JSON数据解析的轻量级解析�
 $ go get github.com/Anderson-Lu/gofasion/gofasion
 ```
 
+### Go module
+
+```shell
+//go.mod
+module github.com/Anderson-Lu/gofasion/gofasion
+```
+
 ### 如何定位JSON节点
 
 你可以把一个JSON数据想象成一颗树，每个元素都是树上的节点(*Fastion),节点的值可以是任意类型(bool,int etc.)，通过链式调用可以从根节点追溯到任意节点，从而取出其中的数值。
