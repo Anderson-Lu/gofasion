@@ -9,6 +9,10 @@ Gofasion是一个方便开发过程中接口JSON数据解析的轻量级解析�
 
 [https://github.com/Anderson-Lu/gofasion](https://github.com/Anderson-Lu/gofasion)
 
+### 要求
+
+需要go 1.9及其以上版本.
+
 ### 安装
 
 ```shell

@@ -10,6 +10,10 @@ Gofasion is a lightweight parsing library that facilitates the parsing of interf
 
 [https://github.com/Anderson-Lu/gofasion](https://github.com/Anderson-Lu/gofasion)
 
+### Required
+
+go 1.9 or above is requried.
+
 ### Installation
 
 ```shell
