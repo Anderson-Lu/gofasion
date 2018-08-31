@@ -41,7 +41,7 @@ func DemoParseArrayForEach() {
 var testJson = `
 	{
 		"name":"foo",
-		"value":1,
+		"value":1.1,
 		"second_level": {"name":2},
 		"second_array":[1,2,3,4,5,6,7],
 		"bool": true,
@@ -51,7 +51,7 @@ var testJson = `
 
 var testJson2 = `
   [
-	  1,2,"helloword",{"name":"demo"}
+	  1.0,2,"helloword",{"name":"demo"}
   ]  
 `
 
@@ -60,7 +60,10 @@ func main() {
 	fsion := gofasion.NewFasion(testJson)
 	fmt.Println(fsion.Get("name").ValueStr())
 	fmt.Println(fsion.Get("value").ValueInt())
+	fmt.Println(fsion.Get("value").ValueFloat64())
 	fmt.Println(fsion.Json())
+
+	return
 
 	i32 := fsion.Get("value").ValueInt32()
 	fmt.Println(i32)
