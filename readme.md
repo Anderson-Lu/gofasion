@@ -92,7 +92,7 @@ Can quickly get values ​​by `Array()` method
 package main
 
 import (
-  "github.com/Anderson-Lu/fasion/gofasion"
+  "github.com/Anderson-Lu/gofasion/gofasion"
   "fmt"
 )
 

@@ -91,7 +91,7 @@ for _,v := range array{
 package main
 
 import (
-  "github.com/Anderson-Lu/fasion/gofasion"
+  "github.com/Anderson-Lu/gofasion/gofasion"
   "fmt"
 )
 
