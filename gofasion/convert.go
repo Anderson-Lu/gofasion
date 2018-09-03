@@ -157,19 +157,22 @@ func (self *Fasion) Value(dest interface{}) error {
 //List All keys of this node
 func (self *Fasion) Keys() []string {
 	var keys []string
-	if val, ok := self.current.(map[string]interface{}); ok {
-		for k, _ := range val {
-			keys = append(keys, k)
-		}
+	curMap, err := self.parseJson()
+	if err != nil {
+		return keys
+	}
+	for k, _ := range curMap {
+		keys = append(keys, k)
 	}
 	return keys
 }
 
 //Judge if specific key exists or not
 func (self *Fasion) HasKey(key string) bool {
-	if val, ok := self.current.(map[string]interface{}); ok {
-		_, hasKey := val[key]
-		return hasKey
+	curMap, err := self.parseJson()
+	if err != nil {
+		return false
 	}
-	return false
+	_, hasKey := curMap[key]
+	return hasKey
 }

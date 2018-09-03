@@ -8,7 +8,7 @@ import (
 
 func DemoGetKeys() {
 	fsion := gofasion.NewFasion(`{"name":"hello","value":"1111"}`)
-	fmt.Println(fsion.Keys())
+	fmt.Println("keys:", fsion.Keys())
 }
 
 func DemoHasKeys() {
@@ -68,13 +68,16 @@ var testJson2 = `
 
 func main() {
 
+	DemoGetKeys()
+	DemoHasKeys()
+
+	return
+
 	fsion := gofasion.NewFasion(testJson)
 	fmt.Println(fsion.Get("name").ValueStr())
 	fmt.Println(fsion.Get("value").ValueInt())
 	fmt.Println(fsion.Get("value").ValueFloat64())
 	fmt.Println(fsion.Json())
-
-	return
 
 	i32 := fsion.Get("value").ValueInt32()
 	fmt.Println(i32)
