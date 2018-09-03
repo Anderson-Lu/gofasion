@@ -191,6 +191,8 @@ func main() {
   Array() []*Fasion         //获取节点的数组对象
   ArrayForEach(func(int, *Fasion)) //直接遍历对象数组
   Value(interface{}) error  //与json.Marshal()类似
+  Keys() []string           //获取所有键值
+  HasKey(string) bool       //判断是否具有指定的键值
 ```
 
 ### 性能

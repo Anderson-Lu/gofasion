@@ -196,6 +196,8 @@ func main() {
   ArrayForEach(func(int, *Fasion)) //Get the array object of the node iterator
   Value(interface{}) error  //Similar to json.Marshal()
   Json() string             //Get the JSON string of the node
+  Keys() []string           //Get all keys of the node
+  HasKey(string) bool       //Judge if the specific node contains specific key
 ```
 
 ### Version
