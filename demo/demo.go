@@ -6,6 +6,17 @@ import (
 	"github.com/Anderson-Lu/gofasion/gofasion"
 )
 
+func DemoGetKeys() {
+	fsion := gofasion.NewFasion(`{"name":"hello","value":"1111"}`)
+	fmt.Println(fsion.Keys())
+}
+
+func DemoHasKeys() {
+	fsion := gofasion.NewFasion(`{"name":"hello","value":"1111"}`)
+	fmt.Println(fsion.HasKey("name"))
+	fmt.Println(fsion.HasKey("value1"))
+}
+
 func DemoCheckJsonFormat() {
 	fsion := gofasion.NewFasion("i am a wrong json encoding format")
 	fmt.Println(fsion.IsValidJson())
