@@ -1,7 +1,7 @@
 GoFasion: A lightweight JSON data parsing library with chained calling style
 ---
 
-[中文文档](https://github.com/Anderson-Lu/gofasion/blob/master/readme_cn.md)
+[中文文档](https://github.com/Anderson-Lu/gofasion/blob/master/readme_cn.md) | [Update Log](https://github.com/Anderson-Lu/gofasion/wiki/Update-Logs)
 
 Gofasion is a lightweight parsing library that facilitates the parsing of interface JSON data during development. Its biggest feature is to support chained calls, which means that the target key name and key value can be directly obtained without pre-defining the structure of the data.
 

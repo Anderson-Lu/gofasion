@@ -1,7 +1,7 @@
 GoFasion:一个轻量级的具备链式调用风格的JSON数据解析神器
 ---
 
-[English Document](https://github.com/Anderson-Lu/gofasion/blob/master/readme.md)
+[English Document](https://github.com/Anderson-Lu/gofasion/blob/master/readme.md) | [Update Log](https://github.com/Anderson-Lu/gofasion/wiki/Update-Logs)
 
 Gofasion是一个方便开发过程中接口JSON数据解析的轻量级解析库，其最大的特点在于支持链式调用，也就是说不必预先定义好数据的结构就可以直接获取到目标键名和键值。
 
