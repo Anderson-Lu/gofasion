@@ -180,19 +180,21 @@ func main() {
   GetFromPath(dir string) *IFasion  //获取JSON节点对象(路径比如a.b.c)
 
   //Methods to get value from *Fasion node
-  ValueStr() string         //获取节点的字符串值
-  ValueInt() int            //获取节点的int值
-  ValueInt16() int16 
+  ValueStr() string                //获取节点的字符串值
+  ValueInt() int                   //获取节点的int值
+  ValueInt16() int16                      
   ValueInt32() int32
   ValueInt64() int64
   ValueFloat32() float32
+  ValueFloat32N(int) float32       //保留指定位数的值
   ValueFloat64() float64
+  ValueFloat64N(int) float64       //保留指定位数的值
   ValueBool() bool
-  Array() []*Fasion         //获取节点的数组对象
+  Array() []*Fasion                //获取节点的数组对象
   ArrayForEach(func(int, *Fasion)) //直接遍历对象数组
-  Value(interface{}) error  //与json.Marshal()类似
-  Keys() []string           //获取所有键值
-  HasKey(string) bool       //判断是否具有指定的键值
+  Value(interface{}) error         //与json.Marshal()类似
+  Keys() []string                  //获取所有键值
+  HasKey(string) bool              //判断是否具有指定的键值
 ```
 
 ### 性能

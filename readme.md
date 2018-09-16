@@ -175,29 +175,31 @@ func main() {
 
 ```golang
   //how to create *Fasion instance
-  func NewFasion(rawJson string) *Fasion               //Create Fasion From raw json
-  func NewFasionFromBytes(rawJson []byte) *Fasion      //Create Fasion From bytes
+  func NewFasion(rawJson string) *Fasion                              //Create Fasion From raw json
+  func NewFasionFromBytes(rawJson []byte) *Fasion                     //Create Fasion From bytes
   func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion  //Create Fasion From http get
 
   //Methods for *Fasion
-  Get(key string) *IFasion  //Get the JSON node object, each node object contains all the methods below
+  Get(key string) *IFasion         //Get the JSON node object, each node object contains all the methods below
   GetFromPath(dir string) *IFasion //Get the JSON node via node path like node1.node2.node3
 
   //Methods to get value from *Fasion node
-  ValueStr() string         //Get the string value of the node
-  ValueInt() int            //Get the int value of the node
+  ValueStr() string                //Get the string value of the node
+  ValueInt() int                   //Get the int value of the node
   ValueInt16() int16 
   ValueInt32() int32   
   ValueInt64() int64
   ValueFloat32() float32
+  ValueFloat32N(int) float32       //Keep the specified digit value. 
   ValueFloat64() float64
+  ValueFloat64N(int) float64       //Keep the specified digit value. 
   ValueBool() bool
-  Array() []*Fasion         //Get the array object of the node
+  Array() []*Fasion                //Get the array object of the node
   ArrayForEach(func(int, *Fasion)) //Get the array object of the node iterator
-  Value(interface{}) error  //Similar to json.Marshal()
-  Json() string             //Get the JSON string of the node
-  Keys() []string           //Get all keys of the node
-  HasKey(string) bool       //Judge if the specific node contains specific key
+  Value(interface{}) error        //Similar to json.Marshal()
+  Json() string                   //Get the JSON string of the node
+  Keys() []string                 //Get all keys of the node
+  HasKey(string) bool             //Judge if the specific node contains specific key
 ```
 
 ### Version

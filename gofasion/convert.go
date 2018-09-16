@@ -93,6 +93,16 @@ func (self *Fasion) ValueFloat32() float32 {
 	return 0
 }
 
+//Retained specifc decimals
+//parse 1.1115 and spec is 3 and return 1.112
+func (self *Fasion) ValueFloat32N(spec int) float32 {
+	ret := self.ValueFloat32()
+	if spec <= 0 {
+		return ret
+	}
+	return float32(round(float64(ret), spec))
+}
+
 //Parse current node value to float64
 func (self *Fasion) ValueFloat64() float64 {
 	self.initCur()
@@ -103,6 +113,16 @@ func (self *Fasion) ValueFloat64() float64 {
 		return n
 	}
 	return 0
+}
+
+//Retained specifc decimals
+//parse 1.1115 and spec is 3 and return 1.112
+func (self *Fasion) ValueFloat64N(spec int) float64 {
+	ret := self.ValueFloat64()
+	if spec <= 0 {
+		return ret
+	}
+	return round(ret, spec)
 }
 
 //Marshal current node to json string

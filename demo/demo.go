@@ -6,6 +6,10 @@ import (
 	"github.com/Anderson-Lu/gofasion/gofasion"
 )
 
+func DemoRoundFloat64() {
+	fmt.Println(Round(10.2225222, 3))
+}
+
 func DemoGetKeys() {
 	fsion := gofasion.NewFasion(`{"name":"hello","value":"1111"}`)
 	fmt.Println("keys:", fsion.Keys())
@@ -67,6 +71,8 @@ var testJson2 = `
 `
 
 func main() {
+
+	DemoRoundFloat64()
 
 	DemoGetKeys()
 	DemoHasKeys()
