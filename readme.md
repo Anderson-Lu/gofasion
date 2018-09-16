@@ -1,3 +1,5 @@
+![logo](https://github.com/Anderson-Lu/gofasion/blob/master/logo.png) 
+
 GoFasion: A lightweight JSON data parsing library with chained calling style
 ---
 
