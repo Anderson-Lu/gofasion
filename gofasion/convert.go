@@ -196,3 +196,60 @@ func (self *Fasion) HasKey(key string) bool {
 	_, hasKey := curMap[key]
 	return hasKey
 }
+
+func (self *Fasion) ValueDefaultStr(defaultValue string) string {
+	ret := self.ValueStr()
+	if ret == "" {
+		return defaultValue
+	}
+	return ret
+}
+
+func (self *Fasion) ValueDefaultInt(defaultValue int) int {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueInt()
+}
+
+func (self *Fasion) ValueDefaultInt16(defaultValue int16) int16 {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueInt16()
+}
+
+func (self *Fasion) ValueDefaultInt32(defaultValue int32) int32 {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueInt32()
+}
+
+func (self *Fasion) ValueDefaultInt64(defaultValue int64) int64 {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueInt64()
+}
+
+func (self *Fasion) ValueDefaultFloat32(defaultValue float32) float32 {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueFloat32()
+}
+
+func (self *Fasion) ValueDefaultFloat64(defaultValue float64) float64 {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueFloat64()
+}
+
+func (self *Fasion) ValueDefaultBool(defaultValue bool) bool {
+	if self.current == nil {
+		return defaultValue
+	}
+	return self.ValueBool()
+}

@@ -202,6 +202,15 @@ func main() {
   Json() string                   //Get the JSON string of the node
   Keys() []string                 //Get all keys of the node
   HasKey(string) bool             //Judge if the specific node contains specific key
+
+  ValueDefaultStr(string) string  //If not exists, *Fasion will return the specific default value
+	ValueDefaultInt(int) int
+	ValueDefaultInt16(int16) int16
+	ValueDefaultInt32(int32) int32
+	ValueDefaultInt64(int64) int64
+	ValueDefaultFloat32(float32) float32
+	ValueDefaultFloat64(float64) float64
+	ValueDefaultBool(bool) bool
 ```
 
 ### Version

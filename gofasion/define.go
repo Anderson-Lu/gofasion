@@ -15,6 +15,15 @@ type IFasion interface {
 	ValueFloat64() float64
 	ValueBool() bool
 
+	ValueDefaultStr(string) string
+	ValueDefaultInt(int) int
+	ValueDefaultInt16(int16) int16
+	ValueDefaultInt32(int32) int32
+	ValueDefaultInt64(int64) int64
+	ValueDefaultFloat32(float32) float32
+	ValueDefaultFloat64(float64) float64
+	ValueDefaultBool(bool) bool
+
 	Array() []*Fasion
 	ArrayForEach(func(int, *Fasion))
 

@@ -195,6 +195,15 @@ func main() {
   Value(interface{}) error         //与json.Marshal()类似
   Keys() []string                  //获取所有键值
   HasKey(string) bool              //判断是否具有指定的键值
+
+  ValueDefaultStr(string) string  //If not exists, *Fasion will return the specific default value
+	ValueDefaultInt(int) int
+	ValueDefaultInt16(int16) int16
+	ValueDefaultInt32(int32) int32
+	ValueDefaultInt64(int64) int64
+	ValueDefaultFloat32(float32) float32
+	ValueDefaultFloat64(float64) float64
+	ValueDefaultBool(bool) bool
 ```
 
 ### 性能
