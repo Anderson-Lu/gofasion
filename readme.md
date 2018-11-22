@@ -169,6 +169,20 @@ func main() {
 
 ```
 
+### SetJsonParser
+
+In `v1.1`, or later, we provide a new method `SetJson Parser`, through which you can customize the JSON parser, such as using this [optimized parser library](https://github.com/json-iterator/go), by setting the following settings, you can replace the default JSON parser with the desired custom parser.
+
+```golang
+import "github.com/json-iterator/go"
+
+//Parser
+gofsion.SetJsonParser(jsoniter.ConfigCompatibleWithStandardLibrary.Marshal,jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal)
+
+```
+
+
+
 ### Performance
 
 1,000,000 `*Fastion.Get()` cost about 5,000ms ~ 7,000ms.
@@ -211,6 +225,9 @@ func main() {
   ValueDefaultFloat32(float32) float32
   ValueDefaultFloat64(float64) float64
   ValueDefaultBool(bool) bool
+
+  //More option for version 1.11 or higher
+  SetJsonParser(customMarshal func(interface{}) ([]byte, error), customUnmarshal func([]byte, interface{}) error)
 ```
 
 ### Version

@@ -1,7 +1,6 @@
 package gofasion
 
 import (
-	"encoding/json"
 	"strconv"
 	"strings"
 )
@@ -171,7 +170,7 @@ func (self *Fasion) ValueBool() bool {
 
 //Parse current node value to specific interface
 func (self *Fasion) Value(dest interface{}) error {
-	return json.Unmarshal([]byte(self.rawJson), &dest)
+	return _unmarshalFunc([]byte(self.rawJson), &dest)
 }
 
 //List All keys of this node

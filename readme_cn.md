@@ -206,6 +206,17 @@ func main() {
   ValueDefaultBool(bool) bool
 ```
 
+### SetJsonParser
+
+在`v1.1`或者更高版本，我们提供了新的方法`SetJsonParser`,通过这个方法，可以自定义JSON解析器，例如使用这个[优化的解析库](https://github.com/json-iterator/go)，通过以下设置，即可将默认的json解析替换为大家希望的自定义解析器.
+
+```golang
+import "github.com/json-iterator/go"
+
+//Parser
+gofsion.SetJsonParser(jsoniter.ConfigCompatibleWithStandardLibrary.Marshal,jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal)
+```
+
 ### 性能
 
 1,000,000 `*Fastion.Get()` 耗费 5,000ms ~ 7,000ms.

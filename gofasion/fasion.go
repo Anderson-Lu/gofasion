@@ -6,13 +6,24 @@ import (
 	"strings"
 )
 
+var _unmarshalFunc func([]byte, interface{}) error
+var _marshalFunc func(interface{}) ([]byte, error)
+
 type Fasion struct {
 	rawJson string
 	errInfo error
 	current interface{}
 }
 
+//Setup your custom marshal and unmarshal methods
+func SetJsonParser(customMarshal func(interface{}) ([]byte, error), customUnmarshal func([]byte, interface{}) error) {
+	_unmarshalFunc = customUnmarshal
+	_marshalFunc = customMarshal
+}
+
 func NewFasion(rawJson string) *Fasion {
+	_unmarshalFunc = json.Unmarshal
+	_marshalFunc = json.Marshal
 	return &Fasion{
 		rawJson: rawJson,
 	}
@@ -40,6 +51,7 @@ func NewFasionFromUrl(targetUrl string, params url.Values) *Fasion {
 	}
 }
 
+//Get specific node
 func (self *Fasion) Get(key string) *Fasion {
 	curMap, err := self.parseJson()
 	if err != nil {
