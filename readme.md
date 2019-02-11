@@ -179,7 +179,7 @@ In `v1.1`, or later, we provide a new method `SetJson Parser`, through which you
 import "github.com/json-iterator/go"
 
 //Parser
-gofsion.SetJsonParser(jsoniter.ConfigCompatibleWithStandardLibrary.Marshal,jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal)
+gofasion.SetJsonParser(jsoniter.ConfigCompatibleWithStandardLibrary.Marshal,jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal)
 
 ```
 
