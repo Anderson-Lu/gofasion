@@ -10,9 +10,10 @@ var _unmarshalFunc func([]byte, interface{}) error
 var _marshalFunc func(interface{}) ([]byte, error)
 
 type Fasion struct {
-	rawJson string
-	errInfo error
-	current interface{}
+	rawJson    string
+	errInfo    error
+	current    interface{}
+	currentKey string
 }
 
 //Setup your custom marshal and unmarshal methods
@@ -64,7 +65,7 @@ func (self *Fasion) Get(key string) *Fasion {
 			return NewFasion(rawJson)
 		}
 	}
-	return self
+	return NewFasion("")
 }
 
 //Get node directly via absolute path like "node1.node2.node3"

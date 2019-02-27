@@ -26,20 +26,25 @@ func (self *Fasion) initArray() {
 //Parse current node value to string
 func (self *Fasion) ValueStr() string {
 	self.initCur()
-	if val, ok := self.current.(string); ok {
-		return strings.Replace(val, "\"", "", -1)
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			return x
+		} else {
+			return self.rawJson
+		}
 	}
-	return strings.Replace(self.rawJson, "\"", "", -1)
+	return ""
 }
 
 //Parse current node value to int64
 func (self *Fasion) ValueInt64() int64 {
 	self.initCur()
-	if val, ok := self.current.(int64); ok {
-		return val
-	}
-	if n, ok := strconv.ParseInt(self.rawJson, 10, 64); ok == nil {
-		return n
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			if n, ok := strconv.ParseInt(x, 10, 64); ok == nil {
+				return n
+			}
+		}
 	}
 	return 0
 }
@@ -47,11 +52,12 @@ func (self *Fasion) ValueInt64() int64 {
 //Parse current node value to int32
 func (self *Fasion) ValueInt32() int32 {
 	self.initCur()
-	if val, ok := self.current.(int32); ok {
-		return val
-	}
-	if n, ok := strconv.ParseInt(self.rawJson, 10, 32); ok == nil {
-		return int32(n)
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			if n, ok := strconv.ParseInt(x, 10, 64); ok == nil {
+				return int32(n)
+			}
+		}
 	}
 	return 0
 }
@@ -59,11 +65,12 @@ func (self *Fasion) ValueInt32() int32 {
 //Parse current node value to int16
 func (self *Fasion) ValueInt16() int16 {
 	self.initCur()
-	if val, ok := self.current.(int16); ok {
-		return val
-	}
-	if n, ok := strconv.ParseInt(self.rawJson, 10, 16); ok == nil {
-		return int16(n)
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			if n, ok := strconv.ParseInt(x, 10, 64); ok == nil {
+				return int16(n)
+			}
+		}
 	}
 	return 0
 }
@@ -71,11 +78,12 @@ func (self *Fasion) ValueInt16() int16 {
 //Parse current node value to int
 func (self *Fasion) ValueInt() int {
 	self.initCur()
-	if val, ok := self.current.(int); ok {
-		return val
-	}
-	if n, ok := strconv.Atoi(self.rawJson); ok == nil {
-		return n
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			if n, ok := strconv.ParseInt(x, 10, 64); ok == nil {
+				return int(n)
+			}
+		}
 	}
 	return 0
 }
@@ -83,11 +91,12 @@ func (self *Fasion) ValueInt() int {
 //Parse current node value to float32
 func (self *Fasion) ValueFloat32() float32 {
 	self.initCur()
-	if val, ok := self.current.(float32); ok {
-		return val
-	}
-	if n, ok := strconv.ParseFloat(self.rawJson, 32); ok == nil {
-		return float32(n)
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			if n, ok := strconv.ParseFloat(x, 32); ok == nil {
+				return float32(n)
+			}
+		}
 	}
 	return 0
 }
@@ -105,11 +114,12 @@ func (self *Fasion) ValueFloat32N(spec int) float32 {
 //Parse current node value to float64
 func (self *Fasion) ValueFloat64() float64 {
 	self.initCur()
-	if val, ok := self.current.(float64); ok {
-		return val
-	}
-	if n, ok := strconv.ParseFloat(self.rawJson, 64); ok == nil {
-		return n
+	if val, ok := self.current.(map[string]interface{}); ok {
+		if x, ok := val[self.currentKey].(string); ok {
+			if n, ok := strconv.ParseFloat(x, 64); ok == nil {
+				return n
+			}
+		}
 	}
 	return 0
 }
@@ -181,6 +191,9 @@ func (self *Fasion) Keys() []string {
 		return keys
 	}
 	for k, _ := range curMap {
+		if k == self.currentKey {
+			continue
+		}
 		keys = append(keys, k)
 	}
 	return keys
@@ -188,6 +201,9 @@ func (self *Fasion) Keys() []string {
 
 //Judge if specific key exists or not
 func (self *Fasion) HasKey(key string) bool {
+	if key == self.currentKey {
+		return false
+	}
 	curMap, err := self.parseJson()
 	if err != nil {
 		return false
@@ -205,49 +221,49 @@ func (self *Fasion) ValueDefaultStr(defaultValue string) string {
 }
 
 func (self *Fasion) ValueDefaultInt(defaultValue int) int {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueInt()
 }
 
 func (self *Fasion) ValueDefaultInt16(defaultValue int16) int16 {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueInt16()
 }
 
 func (self *Fasion) ValueDefaultInt32(defaultValue int32) int32 {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueInt32()
 }
 
 func (self *Fasion) ValueDefaultInt64(defaultValue int64) int64 {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueInt64()
 }
 
 func (self *Fasion) ValueDefaultFloat32(defaultValue float32) float32 {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueFloat32()
 }
 
 func (self *Fasion) ValueDefaultFloat64(defaultValue float64) float64 {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueFloat64()
 }
 
 func (self *Fasion) ValueDefaultBool(defaultValue bool) bool {
-	if self.current == nil {
+	if self.current == nil && self.currentKey == "" && self.rawJson == "" {
 		return defaultValue
 	}
 	return self.ValueBool()
