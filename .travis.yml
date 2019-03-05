@@ -3,3 +3,7 @@ go:
  - "1.9.2"
  - "1.10.x"
  - master
+before_install:
+  - go get github.com/mattn/goveralls
+script:
+  - $GOPATH/bin/goveralls -service=travis-ci
