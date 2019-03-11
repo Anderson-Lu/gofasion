@@ -4,6 +4,7 @@ GoFasion: A lightweight JSON data parsing library with chained calling style
 
 ![build](https://travis-ci.com/Anderson-Lu/gofasion.svg?branch=master)
 [![codecov](https://codecov.io/gh/Anderson-Lu/gofasion/branch/master/graph/badge.svg)](https://codecov.io/gh/Anderson-Lu/gofasion)
+![go-report](https://goreportcard.com/badge/github.com/Anderson-Lu/gofasion)
 ---
 
 [中文文档](https://github.com/Anderson-Lu/gofasion/blob/master/readme_cn.md) | [Update Log](https://github.com/Anderson-Lu/gofasion/wiki/Update-Logs)
