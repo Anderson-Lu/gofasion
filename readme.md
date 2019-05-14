@@ -28,9 +28,14 @@ $ go get github.com/Anderson-Lu/gofasion/gofasion
 
 ### Go module
 
+1. create `go.mod` in the root path of your project.
+2. make sure you have enable `GO111MODULE` by running `export GO111MODULE=on`
+3. execute `go build` and you will find all dependencies have been added automatically.
+
 ```shell
-//go.mod
-module github.com/Anderson-Lu/gofasion/gofasion
+module demo_test/gofasion_demo
+
+require github.com/Anderson-Lu/gofasion v0.0.0-20190311020154-5db4d09c9cb8
 ```
 
 ### How to locate a JSON node

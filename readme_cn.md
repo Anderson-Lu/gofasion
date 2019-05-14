@@ -21,9 +21,15 @@ $ go get github.com/Anderson-Lu/gofasion/gofasion
 
 ### Go module
 
+
+1. 在项目根目录下创建一个空的 `go.mod`
+2. 确保已经启动`export GO111MODULE=on`
+3. 执行`go build`,go.mod会自动添加
+
 ```shell
-//go.mod
-module github.com/Anderson-Lu/gofasion/gofasion
+module demo_test/gofasion_demo
+
+require github.com/Anderson-Lu/gofasion v0.0.0-20190311020154-5db4d09c9cb8
 ```
 
 ### 如何定位JSON节点
