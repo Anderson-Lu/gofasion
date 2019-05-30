@@ -174,6 +174,9 @@ func main() {
   fsion.Value(&iter)
   fmt.Println(iter.Name)
   fmt.Println(iter.Value)
+
+  //support check if key str2 exists or not 
+  exist, val := root.Get("str2").ValStr()
 }
 
 ```
@@ -237,6 +240,18 @@ gofasion.SetJsonParser(jsoniter.ConfigCompatibleWithStandardLibrary.Marshal,json
 
   //More option for version 1.11 or higher
   SetJsonParser(customMarshal func(interface{}) ([]byte, error), customUnmarshal func([]byte, interface{}) error)
+
+  //for v1.3 or later version, support check if key exists
+  ValStr() (bool, string)
+  ValInt64() (bool, int64)
+  ValInt32() (bool, int32)
+  ValInt16() (bool, int16)
+  ValInt() (bool, int)
+  ValFloat32() (bool,float32)
+  ValFloat32N(int) (bool,float32)
+  ValFloat64() (bool,float64)
+  ValFloat64N(int) (bool,float64)
+  ValBool() (bool,bool)
 ```
 
 ### Version

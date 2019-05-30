@@ -1,6 +1,7 @@
 package gofasion
 
-type IFasion interface {
+/*
+
 	Get(key string) *IFasion
 	GetFromPath(dir string) *IFasion
 
@@ -31,4 +32,16 @@ type IFasion interface {
 	HasKey(key string) bool
 
 	Value(interface{}) error
-}
+
+	//for v1.3 or later version, support check if key exists
+	ValStr() (bool, string)
+	ValInt64() (bool, int64)
+	ValInt32() (bool, int32)
+	ValInt16() (bool, int16)
+	ValInt() (bool, int)
+	ValFloat32() (bool,float32)
+	ValFloat32N(int) (bool,float32)
+	ValFloat64() (bool,float64)
+	ValFloat64N(int) (bool,float64)
+	ValBool() (bool,bool)
+*/

@@ -25,6 +25,9 @@ func (self *Fasion) initArray() {
 
 //Parse current node value to string
 func (self *Fasion) ValueStr() string {
+	if !self.exists {
+		return ""
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -38,6 +41,9 @@ func (self *Fasion) ValueStr() string {
 
 //Parse current node value to int64
 func (self *Fasion) ValueInt64() int64 {
+	if !self.exists {
+		return 0
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -51,6 +57,9 @@ func (self *Fasion) ValueInt64() int64 {
 
 //Parse current node value to int32
 func (self *Fasion) ValueInt32() int32 {
+	if !self.exists {
+		return 0
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -64,6 +73,9 @@ func (self *Fasion) ValueInt32() int32 {
 
 //Parse current node value to int16
 func (self *Fasion) ValueInt16() int16 {
+	if !self.exists {
+		return 0
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -77,6 +89,9 @@ func (self *Fasion) ValueInt16() int16 {
 
 //Parse current node value to int
 func (self *Fasion) ValueInt() int {
+	if !self.exists {
+		return 0
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -90,6 +105,9 @@ func (self *Fasion) ValueInt() int {
 
 //Parse current node value to float32
 func (self *Fasion) ValueFloat32() float32 {
+	if !self.exists {
+		return 0
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -104,6 +122,9 @@ func (self *Fasion) ValueFloat32() float32 {
 //Retained specifc decimals
 //parse 1.1115 and spec is 3 and return 1.112
 func (self *Fasion) ValueFloat32N(spec int) float32 {
+	if !self.exists {
+		return 0
+	}
 	ret := self.ValueFloat32()
 	if spec <= 0 {
 		return ret
@@ -113,6 +134,9 @@ func (self *Fasion) ValueFloat32N(spec int) float32 {
 
 //Parse current node value to float64
 func (self *Fasion) ValueFloat64() float64 {
+	if !self.exists {
+		return 0.0
+	}
 	self.initCur()
 	if val, ok := self.current.(map[string]interface{}); ok {
 		if x, ok := val[self.currentKey].(string); ok {
@@ -147,7 +171,7 @@ func (self *Fasion) Array() []*Fasion {
 		for _, v := range val {
 			rawJson, err := self.toJson(v)
 			if err == nil {
-				result = append(result, NewFasion(rawJson))
+				result = append(result, newFasion(rawJson, true))
 			}
 		}
 	}
@@ -164,6 +188,9 @@ func (self *Fasion) ArrayForEach(job func(int, *Fasion)) {
 
 //Parse current node value to bool
 func (self *Fasion) ValueBool() bool {
+	if !self.exists {
+		return false
+	}
 	self.initCur()
 	valueStr := self.ValueStr()
 	if valueStr == "" {
@@ -267,4 +294,44 @@ func (self *Fasion) ValueDefaultBool(defaultValue bool) bool {
 		return defaultValue
 	}
 	return self.ValueBool()
+}
+
+func (self *Fasion) ValStr() (bool, string) {
+	return self.exists, self.ValueStr()
+}
+
+func (self *Fasion) ValInt64() (bool, int64) {
+	return self.exists, self.ValueInt64()
+}
+
+func (self *Fasion) ValInt32() (bool, int32) {
+	return self.exists, self.ValueInt32()
+}
+
+func (self *Fasion) ValInt16() (bool, int16) {
+	return self.exists, self.ValueInt16()
+}
+
+func (self *Fasion) ValInt() (bool, int) {
+	return self.exists, self.ValueInt()
+}
+
+func (self *Fasion) ValFloat64() (bool, float64) {
+	return self.exists, self.ValueFloat64()
+}
+
+func (self *Fasion) ValFloat64N(spec int) (bool, float64) {
+	return self.exists, self.ValueFloat64N(spec)
+}
+
+func (self *Fasion) ValFloat32N(spec int) (bool, float32) {
+	return self.exists, self.ValueFloat32N(spec)
+}
+
+func (self *Fasion) ValFloat32() (bool, float32) {
+	return self.exists, self.ValueFloat32()
+}
+
+func (self *Fasion) ValBool() (bool, bool) {
+	return self.exists, self.ValueBool()
 }

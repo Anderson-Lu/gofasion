@@ -14,6 +14,7 @@ type Fasion struct {
 	errInfo    error
 	current    interface{}
 	currentKey string
+	exists     bool
 }
 
 //Setup your custom marshal and unmarshal methods
@@ -27,6 +28,15 @@ func NewFasion(rawJson string) *Fasion {
 	_marshalFunc = json.Marshal
 	return &Fasion{
 		rawJson: rawJson,
+	}
+}
+
+func newFasion(rawJson string, exists bool) *Fasion {
+	_unmarshalFunc = json.Unmarshal
+	_marshalFunc = json.Marshal
+	return &Fasion{
+		rawJson: rawJson,
+		exists:  exists,
 	}
 }
 
@@ -62,10 +72,10 @@ func (self *Fasion) Get(key string) *Fasion {
 	if v, ok := curMap[key]; ok {
 		rawJson, err := self.toJson(v)
 		if err == nil {
-			return NewFasion(rawJson)
+			return newFasion(rawJson, true)
 		}
 	}
-	return NewFasion("")
+	return newFasion("", false)
 }
 
 //Get node directly via absolute path like "node1.node2.node3"

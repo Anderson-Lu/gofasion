@@ -168,6 +168,9 @@ func main() {
   fsion.Value(&iter)
   fmt.Println(iter.Name)
   fmt.Println(iter.Value)
+
+  //支持返回是否存在相应的键值，1.3以及更高的版本支持 ValStr(),ValInt()...等一系列方法
+  exist, val := root.Get("str2").ValStr()
 }
 
 ```
@@ -210,6 +213,21 @@ func main() {
   ValueDefaultFloat32(float32) float32
   ValueDefaultFloat64(float64) float64
   ValueDefaultBool(bool) bool
+
+  //1.1版本开始支持自定义JSON解析类
+  SetJsonParser(customMarshal func(interface{}) ([]byte, error), customUnmarshal func([]byte, interface{}) error)
+
+  //1.3版本开始支持返回键值是否存在
+  ValStr() (bool, string)
+  ValInt64() (bool, int64)
+  ValInt32() (bool, int32)
+  ValInt16() (bool, int16)
+  ValInt() (bool, int)
+  ValFloat32() (bool,float32)
+  ValFloat32N(int) (bool,float32)
+  ValFloat64() (bool,float64)
+  ValFloat64N(int) (bool,float64)
+  ValBool() (bool,bool)
 ```
 
 ### SetJsonParser

@@ -50,7 +50,13 @@ func TestBase(t *testing.T) {
 	if root.Get("float2").ValueFloat32N(3) != 1.115 {
 		t.Errorf("test failed")
 	}
+	if root.Get("float2").ValueFloat32N(0) != 1.1155 {
+		t.Errorf("test failed")
+	}
 	if root.Get("float2").ValueFloat64N(2) != 1.12 {
+		t.Errorf("test failed")
+	}
+	if root.Get("float2").ValueFloat64N(-1) != 1.1155 {
 		t.Errorf("test failed")
 	}
 	if root.Get("array1").Json() != `[1,2,3,4]` {
@@ -99,8 +105,46 @@ func TestBase(t *testing.T) {
 		t.Errorf("test failed")
 	}
 	root.ArrayForEach(func(idx int, fsion *Fasion) {
-
+		if idx+1 != fsion.ValueInt() {
+			t.Errorf("test failed")
+		}
 	})
+	if ok, val := root.Get("str2").ValStr(); !ok || val != "str1" {
+		t.Errorf("test failed,%s,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValStr(); ok || val != "" {
+		t.Errorf("test failed,%s,%v", val, ok)
+	}
+	if ok, val := root.Get("str1").ValStr(); !ok || val != "" {
+		t.Errorf("test failed,%s,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValInt64(); ok || val != 0 {
+		t.Errorf("test failed,%d,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValInt32(); ok || val != 0 {
+		t.Errorf("test failed,%d,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValInt16(); ok || val != 0 {
+		t.Errorf("test failed,%d,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValInt(); ok || val != 0 {
+		t.Errorf("test failed,%d,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValFloat64(); ok || val != 0 {
+		t.Errorf("test failed,%f,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValFloat64N(2); ok || val != 0 {
+		t.Errorf("test failed,%f,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValFloat32N(2); ok || val != 0 {
+		t.Errorf("test failed,%f,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValFloat32(); ok || val != 0 {
+		t.Errorf("test failed,%f,%v", val, ok)
+	}
+	if ok, val := root.Get("none").ValBool(); ok || val {
+		t.Errorf("test failed,%v,%v", val, ok)
+	}
 }
 
 func TestIsValidJson(t *testing.T) {
@@ -128,7 +172,7 @@ func TestValueArray(t *testing.T) {
 	}
 	for i, v := range arr {
 		if v.ValueInt() != i+1 {
-			t.Errorf("failed to test value array")
+			t.Errorf("failed to test value array,%d", v.ValueInt())
 		}
 	}
 }
@@ -154,6 +198,9 @@ func TestGetKeys(t *testing.T) {
 		t.Errorf("Test get keys failed")
 	}
 	if root.HasKey("k1errr") {
+		t.Errorf("Test get keys failed")
+	}
+	if len(root.Get("k1").Keys()) != 0 {
 		t.Errorf("Test get keys failed")
 	}
 }
